@@ -30,7 +30,7 @@ namespace Game {
                     }
                     
                     // Min boundary
-                    if (_value < 0) {
+                    if (_value <= 0) {
                         _value = 0;
                         _onReachZero?.Invoke(_gameOverReason);
                     }

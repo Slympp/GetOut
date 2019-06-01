@@ -1,13 +1,20 @@
-﻿using Game;
+﻿using System.Collections.Generic;
+using Game;
 using Player;
 using Settings;
 using UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
     private static GameManager _instance;
 
+
+    [Header("Levels")]
+    [SerializeField] private List<LevelSettings> LevelSettings;
+
+    [Header("Settings")]
     [SerializeField] private GameSettings GameSettings;
     
     [SerializeField] private GaugeSettings GradesSettings;
@@ -18,11 +25,15 @@ public class GameManager : MonoBehaviour {
     
     [SerializeField] private GaugeSettings FatigueSettings;
     public Gauge Fatigue   { get; private set; }
+    
+    public static int CurrentLevel { get; private set; }
+    private GameObject _instantiatedLevel;
 
     private GameUIController _uiController;
 
-    private const string PlayerPath = "Prefabs/Player";
+    private const string PlayerPath = "Prefabs/Characters/Player";
     private PlayerController _playerController;
+
     
     void Awake() {
         
@@ -38,6 +49,7 @@ public class GameManager : MonoBehaviour {
 
     public void Start() {
         InitGauges();
+        InitLevel();
         InitPlayer();
     }
 
@@ -45,6 +57,17 @@ public class GameManager : MonoBehaviour {
         Grades = new Gauge(GradesSettings, UpdateGauge, GameOver, ToggleWarning);
         Happiness = new Gauge(HappinessSettings, UpdateGauge, GameOver, ToggleWarning);
         Fatigue = new Gauge(FatigueSettings, UpdateGauge, GameOver, ToggleWarning);
+    }
+
+    private void InitLevel() {
+        if (_instantiatedLevel != null)
+            Destroy(_instantiatedLevel);
+
+        if (CurrentLevel < LevelSettings.Count) {
+            _instantiatedLevel = Instantiate(LevelSettings[CurrentLevel].LevelPrefab, transform);
+        } else {
+          Debug.LogError($"GameManager => LevelSettings not found for index {CurrentLevel}");  
+        }
     }
 
     private void InitPlayer() {
@@ -72,5 +95,10 @@ public class GameManager : MonoBehaviour {
 
     public static GameSettings GetSettings() {
         return _instance.GameSettings;
+    }
+    
+    public static void LoadNextLevel() {
+        CurrentLevel++;
+        SceneManager.LoadScene("Game");
     }
 }

@@ -14,6 +14,11 @@ namespace Player {
         private GameManager _gameManager;
         private Camera       _camera;
         private NavMeshAgent _agent;
+
+        private Animator _animator;
+        private Vector3 worldDeltaPosition = Vector3.zero;
+        private Vector3 position = Vector3.zero;
+        private int _walkAnimationHash;
     
         void Awake() {
             _gameManager = GameManager.Get();
@@ -24,6 +29,18 @@ namespace Player {
             _camera = Camera.main;
             if (_camera == null)
                 Debug.LogError("PlayerController => Camera not found.");
+
+            InitAnimator();
+        }
+        
+        private void InitAnimator() {
+            _animator = GetComponentInChildren<Animator>();
+            if (_animator == null)
+                Debug.LogError("PlayerController => Animator not found.");
+            
+            _agent.updatePosition = false;
+            
+            _walkAnimationHash = Animator.StringToHash("walking");
         }
 
         void Update() {
@@ -31,15 +48,18 @@ namespace Player {
             if (CurrentState == State.GameOver)
                 return;
             
-            Target();
+            UpdateTarget();
+
+            UpdatePosition();
         }
 
-        void Target() {
+        private void UpdateTarget() {
             if (Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition), out var hit, Mathf.Infinity, InteractableMask)) {
 
                 if (Input.GetMouseButtonDown(0) && CurrentState != State.Busy) {
+                    StopAllCoroutines();
                     if (hit.collider.CompareTag("Ground"))
-                        StartCoroutine(MoveTo(hit.point, null));
+                        StartCoroutine(MoveTo(hit.point, null, Vector3.zero));
 
                     if (hit.collider.CompareTag("Activity")) {
                         BaseActivity activity = hit.collider.gameObject.GetComponent<BaseActivity>();
@@ -47,22 +67,45 @@ namespace Player {
                             return;
 
                         void DoActivity() => StartCoroutine(activity.Do(SetState));
-                        StartCoroutine(MoveTo(activity.GetRigPosition(), DoActivity));
+                        StartCoroutine(MoveTo(activity.GetRigPosition(), DoActivity, activity.transform.position));
                     }
                 }
             }
         }
+        
+        private void UpdatePosition() {
+ 
+            worldDeltaPosition = _agent.nextPosition - transform.position;
 
-        private IEnumerator MoveTo(Vector3 destination, Action onReach) {
+            // Pull agent towards character
+            if (worldDeltaPosition.magnitude > _agent.radius)
+                _agent.nextPosition = transform.position + 0.9f * worldDeltaPosition;
+            _agent.nextPosition = transform.position;
+        }
+        
+        private void OnAnimatorMove() {
+            position = _animator.rootPosition;
+            position.y = _agent.nextPosition.y;
+            transform.root.position = position;
+        }
+
+        private IEnumerator MoveTo(Vector3 destination, Action onReach, Vector3 lookAt) {
             _agent.SetDestination(destination);
-            if (onReach != null) {
+            _animator.SetBool(_walkAnimationHash, true);
                 
-                while (_agent.pathPending || _agent.remainingDistance >= _agent.stoppingDistance ||
-                       _agent.hasPath || !_agent.velocity.sqrMagnitude.Equals(0f)) {
-                    yield return new WaitForEndOfFrame();
-                }
-                transform.LookAt(destination);
-                onReach();
+            while (_agent.pathPending || 
+                   _agent.remainingDistance >= _agent.stoppingDistance || 
+                   !_agent.velocity.sqrMagnitude.Equals(0f)) {
+                
+                yield return new WaitForEndOfFrame();
+            }
+
+            _animator.SetBool(_walkAnimationHash, false);
+            if (onReach != null) {
+                onReach.Invoke();
+                
+                if (lookAt != Vector3.zero)
+                    transform.LookAt(lookAt);
             }
         }
 
