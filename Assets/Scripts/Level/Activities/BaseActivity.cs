@@ -31,9 +31,6 @@ namespace Level.Activities {
         private GameSettings _settings;
 
         protected void Awake() {
-            _gameManager = GameManager.Get();
-            _settings = GameManager.GetSettings();
-
             _timerObject = Instantiate(Resources.Load<GameObject>(TimerPath), transform);
             if (_timerObject) {
                 _timer = _timerObject.GetComponent<TimerController>().ProgressImage;
@@ -47,6 +44,11 @@ namespace Level.Activities {
             } else {
                 Debug.LogError($"MeshRenderer not found in activity {gameObject.name} children.");
             }
+        }
+
+        protected void Start() {
+            _gameManager = GameManager.Get();
+            _settings = GameManager.GetSettings();
         }
 
         public void ToggleActive(bool active) {
