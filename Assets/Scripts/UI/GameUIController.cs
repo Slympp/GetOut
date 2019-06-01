@@ -9,9 +9,12 @@ namespace UI {
     public class GameUIController : MonoBehaviour {
 
         [SerializeField] private UISettings Settings;
+
+        [SerializeField] private Image GameProgress;
         
         [SerializeField] private Image GradeValue;
         [SerializeField] private Image GradeWarning;
+        [SerializeField] private Transform GradeRequirement;
         
         [SerializeField] private Image HappinessValue;
         [SerializeField] private Image HappinessWarning;
@@ -25,6 +28,14 @@ namespace UI {
         public void EnableGameOver(string reason) {
             GameOver.SetActive(true);
             GameOverReason.text = reason;
+        }
+        
+        public void UpdateGameProgressBar(float value) {
+            GameProgress.fillAmount = value;
+        }
+
+        public void SetGradeRequirementIndicator(float value) {
+            GradeRequirement.localPosition = new Vector3(Mathf.Clamp(value, 2, 198), 0, 0);
         }
         
         public void ProgressGauge(float newPercent, Gauge.GaugeType type) {

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Kindergarten
   GradesRequirement: 60
-  Duration: 300
+  Duration: 60
   LevelPrefab: {fileID: 461331859508282851, guid: 90875cad718aeca4ea6636fe250e0c27,
     type: 3}

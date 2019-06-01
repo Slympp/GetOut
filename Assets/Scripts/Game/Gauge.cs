@@ -32,7 +32,7 @@ namespace Game {
                     // Min boundary
                     if (_value <= 0) {
                         _value = 0;
-                        _onReachZero?.Invoke(_gameOverReason);
+                        _onReachZero?.Invoke(false, _gameOverReason);
                     }
 
                     OnUpdateCallback();
@@ -49,11 +49,11 @@ namespace Game {
         private readonly float _warningValue;
         private bool _wasWarning;
             
-        private readonly Action<string> _onReachZero;
+        private readonly Action<bool, string> _onReachZero;
         private readonly string _gameOverReason;
 
         public Gauge(GaugeSettings settings, Action<float, float, GaugeType> onUpdate, 
-            Action<string> onReachZero, Action<bool, GaugeType> onWarningUpdate) {
+            Action<bool, string> onReachZero, Action<bool, GaugeType> onWarningUpdate) {
             
             _onUpdate = onUpdate;
             _onReachZero = onReachZero;

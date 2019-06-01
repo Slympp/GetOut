@@ -48,7 +48,7 @@ namespace Level.Activities {
 
         protected void Start() {
             _gameManager = GameManager.Get();
-            _settings = GameManager.GetSettings();
+            _settings = GameManager.GetGameSettings();
         }
 
         public void ToggleActive(bool active) {

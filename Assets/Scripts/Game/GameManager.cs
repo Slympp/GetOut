@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Game;
 using Player;
 using Settings;
@@ -48,25 +49,35 @@ public class GameManager : MonoBehaviour {
     }
 
     public void Start() {
-        InitGauges();
-        InitLevel();
-        InitPlayer();
+         LevelSettings settings = GetLevelSettings();
+         if (settings == null) {
+             Debug.LogError($"GameManager => Settings not found for Level: {CurrentLevel}");  
+             return;
+         }
+        
+         InitGauges(settings);
+         InitLevel(settings);
+         InitPlayer();
+
+         StartCoroutine(ProgressGame(settings.Duration));
     }
 
-    private void InitGauges() {
+    private void InitGauges(LevelSettings settings) {
         Grades = new Gauge(GradesSettings, UpdateGauge, GameOver, ToggleWarning);
+        _uiController.SetGradeRequirementIndicator(settings.GradesRequirement / GradesSettings.MaxValue);
+        
         Happiness = new Gauge(HappinessSettings, UpdateGauge, GameOver, ToggleWarning);
         Fatigue = new Gauge(FatigueSettings, UpdateGauge, GameOver, ToggleWarning);
     }
 
-    private void InitLevel() {
+    private void InitLevel(LevelSettings settings) {
         if (_instantiatedLevel != null)
             Destroy(_instantiatedLevel);
 
-        if (CurrentLevel < LevelSettings.Count) {
-            _instantiatedLevel = Instantiate(LevelSettings[CurrentLevel].LevelPrefab, transform);
+        if (settings.LevelPrefab != null) {
+            _instantiatedLevel = Instantiate(settings.LevelPrefab, transform);
         } else {
-          Debug.LogError($"GameManager => LevelSettings not found for index {CurrentLevel}");  
+          Debug.LogError($"GameManager => Prefab not found for Level: {settings.Name}");  
         }
     }
 
@@ -75,7 +86,37 @@ public class GameManager : MonoBehaviour {
         if (player != null)
             _playerController = player.GetComponentInChildren<PlayerController>();
     }
+    
+    private IEnumerator ProgressGame(float duration) {
+        float elapsed = 0;
 
+        _uiController.UpdateGameProgressBar(0);
+            
+        while (elapsed < duration && _playerController.CurrentState != State.GameOver) {
+            elapsed += Time.deltaTime;
+            _uiController.UpdateGameProgressBar(Mathf.Lerp(0, 1, elapsed / duration));
+            yield return new WaitForEndOfFrame();
+        }
+
+        if (_playerController.CurrentState != State.GameOver) {
+            _uiController.UpdateGameProgressBar(1);
+            bool victory = Grades.Value >= GetLevelSettings().GradesRequirement;
+            GameOver(victory, "You didn't pass your exams !");
+        }
+    }
+
+    private void GameOver(bool victory, string reason) {
+        if (_playerController.CurrentState != State.GameOver) {
+            _playerController.SetState(State.GameOver);
+
+            if (victory) {
+                Debug.Log("Show Victory UI");
+            } else {
+                _uiController.EnableGameOver(reason);
+            }
+        }
+    }
+    
     private void UpdateGauge(float value, float max, Gauge.GaugeType type) {
         _uiController.ProgressGauge(value / max, type);
     }
@@ -84,19 +125,18 @@ public class GameManager : MonoBehaviour {
         _uiController.ToggleWarningGauge(active, type);
     }
     
-    private void GameOver(string reason) {
-        _playerController.SetState(State.GameOver);
-        _uiController.EnableGameOver(reason);
+    private LevelSettings GetLevelSettings() {
+        return CurrentLevel < LevelSettings.Count ? LevelSettings[CurrentLevel] : null;
     }
     
     public static GameManager Get() {
         return _instance;
     }
 
-    public static GameSettings GetSettings() {
+    public static GameSettings GetGameSettings() {
         return _instance.GameSettings;
     }
-    
+
     public static void LoadNextLevel() {
         CurrentLevel++;
         SceneManager.LoadScene("Game");
