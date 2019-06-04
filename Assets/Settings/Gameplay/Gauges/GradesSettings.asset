@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GradesSettings
   m_EditorClassIdentifier: 
   Type: 0
-  DefaultValue: 20
+  DefaultValue: 60
   WarningValue: 10
   MaxValue: 100
   GameOverReason: You dropped from school

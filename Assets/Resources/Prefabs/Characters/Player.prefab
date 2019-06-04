@@ -1244,11 +1244,11 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2238334164163898819}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 7b778ae1198cd854eb6760669affc590, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 6db2e617ef02f044e96ad9e8ed86aca7, type: 2}
   m_Controller: {fileID: 9100000, guid: 5bf791128be611a4f9bc375fd97197a7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2338,7 +2338,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 38eb9b4e70a8b2f49a81cdc1c923a9c2, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

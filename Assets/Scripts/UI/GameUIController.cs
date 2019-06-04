@@ -1,8 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Game;
 using Settings;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace UI {
@@ -10,6 +14,12 @@ namespace UI {
 
         [SerializeField] private UISettings Settings;
 
+        [SerializeField] private GameObject TopUI;
+        [SerializeField] private GameObject VictorUI;
+        [SerializeField] private TMP_Text VictorySubtitle;
+        [SerializeField] private GameObject GameOverUI; 
+        [SerializeField] private TMP_Text GameOverSubtitle;
+        
         [SerializeField] private Image GameProgress;
         
         [SerializeField] private Image GradeValue;
@@ -22,12 +32,43 @@ namespace UI {
         [SerializeField] private Image FatigueValue;
         [SerializeField] private Image FatigueWarning;
 
-        [SerializeField] private GameObject GameOver;
-        [SerializeField] private TMP_Text GameOverReason;
+        public void InitFonts(TMP_FontAsset font) {
+            if (font == null) {
+                Debug.LogError("GameUIController => Font not found for this level.");
+                return;
+            }
 
+            TMP_Text[] gameOverTexts = GameOverUI.GetComponentsInChildren<TMP_Text>();
+            foreach (var text in gameOverTexts)
+                text.font = font;
+            
+            TMP_Text[] victoryTexts = VictorUI.GetComponentsInChildren<TMP_Text>();
+            foreach (var text in victoryTexts)
+                text.font = font;
+        }
+
+        public void EnableVictory() {
+            TopUI.SetActive(false);
+            VictorUI.SetActive(true);
+            VictorySubtitle.text = $"You passed {GameManager.Get().CurrentLevelSettings.Name} final tests";
+        }
+        
         public void EnableGameOver(string reason) {
-            GameOver.SetActive(true);
-            GameOverReason.text = reason;
+            TopUI.SetActive(false);
+            GameOverUI.SetActive(true);
+            GameOverSubtitle.text = reason;
+        }
+
+        public void LoadMainMenu() {
+            GameManager.LoadMainMenu();
+        }
+
+        public void LoadNextLevel() {
+            if (GameManager.Get().CurrentLevelSettings.LastLevel) {
+                GameManager.LoadMainMenu();
+            } else {
+                GameManager.LoadNextLevel();
+            }
         }
         
         public void UpdateGameProgressBar(float value) {

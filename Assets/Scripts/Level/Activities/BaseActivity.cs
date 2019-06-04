@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Game;
 using Player;
 using Settings;
 using UI;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 namespace Level.Activities {
@@ -25,12 +29,31 @@ namespace Level.Activities {
         private const string TimerPath = "Prefabs/Activities/Timer";
         private GameObject _timerObject;
         private Image _timer;
+        
+        private const string CursorPath = "Prefabs/Models/Cursor";
+        private const float CursorYOffset = 2f;
+        private GameObject _cursorObject;
 
-        private MeshRenderer _meshRenderer;
+        private List<MeshRenderer> _meshRenderers;
+        private PlayableDirector _playableDirector;
+        
         private GameManager _gameManager;
         private GameSettings _settings;
 
         protected void Awake() {
+            InstantiateElements();
+            
+            _meshRenderers = GetComponentsInChildren<MeshRenderer>().ToList();
+            _playableDirector = GetComponentInChildren<PlayableDirector>();
+            
+            if (_meshRenderers != null) {
+                ToggleActive(false);
+            } else {
+                Debug.LogError($"MeshRenderer not found in activity {gameObject.name} children.");
+            }
+        }
+
+        protected void InstantiateElements() {
             _timerObject = Instantiate(Resources.Load<GameObject>(TimerPath), transform);
             if (_timerObject) {
                 _timer = _timerObject.GetComponent<TimerController>().ProgressImage;
@@ -38,11 +61,12 @@ namespace Level.Activities {
                 Debug.LogError($"Activity {gameObject.name} failed to instantiate Timer");
             }
             
-            _meshRenderer = GetComponentInChildren<MeshRenderer>();
-            if (_meshRenderer != null) {
-                ToggleActive(false);
+            _cursorObject = Instantiate(Resources.Load<GameObject>(CursorPath), transform);
+            _cursorObject.transform.localPosition = new Vector3(0, CursorYOffset, 0);
+            if (_cursorObject) {
+                ToggleHover(false);
             } else {
-                Debug.LogError($"MeshRenderer not found in activity {gameObject.name} children.");
+                Debug.LogError($"Activity {gameObject.name} failed to instantiate Cursor");
             }
         }
 
@@ -51,11 +75,24 @@ namespace Level.Activities {
             _settings = GameManager.GetGameSettings();
         }
 
+        public void ToggleHover(bool active) {
+            _cursorObject.SetActive(active);
+        }
+
         public void ToggleActive(bool active) {
-            _meshRenderer.material = active ? HighlightedMaterial : DefaultMaterial;
+            foreach (MeshRenderer meshRenderer in _meshRenderers) {
+                meshRenderer.material = active ? HighlightedMaterial : DefaultMaterial;
+            }
             
             _timer.fillAmount = active ? 1 : 0;
             _timerObject.SetActive(active);
+
+            if (_playableDirector) {
+                if (active)
+                    _playableDirector.Play();
+                else
+                    _playableDirector.Stop();
+            }
         }
         
         public Vector3 GetRigPosition() {
@@ -69,41 +106,27 @@ namespace Level.Activities {
             // Play animation on Activity
 
             
-            float timeElapsed = 0;
-            float timeSinceLastTick = 0;
-            while (timeElapsed < Duration * _settings.TimeScale) {
+            float elapsed = 0;
+            float elapsedSinceLastTick = 0;
+            while (elapsed < Duration * _settings.TimeScale) {
 
-                _timer.fillAmount = Mathf.Lerp(1, 0, timeElapsed /(Duration * _settings.TimeScale));
+                _timer.fillAmount = Mathf.Lerp(1, 0, elapsed /(Duration * _settings.TimeScale));
 
-                timeElapsed += Time.deltaTime;
-                timeSinceLastTick += Time.deltaTime;
-                if (timeSinceLastTick >= _settings.TimeScale) {
-                    timeSinceLastTick = 0;
-                    ApplyModifiers();
+                elapsed += Time.deltaTime;
+                elapsedSinceLastTick += Time.deltaTime;
+                if (elapsedSinceLastTick >= _settings.TimeScale) {
+                    elapsedSinceLastTick = 0;
+                    _gameManager.ApplyModifiers(GradeModifier, HappinessModifier, FatigueModifier);
                 }
                 
                 yield return new WaitForEndOfFrame();
             }
             
-            ApplyModifiers();
+            _gameManager.ApplyModifiers(GradeModifier, HappinessModifier, FatigueModifier);
             
             // Stop animation on Activity
             ToggleActive(false);
             setState(State.Default);
-        }
-
-        private void ApplyModifiers() {
-            if (!GradeModifier.Equals(0)) {
-                _gameManager.Grades.Value += GradeModifier;
-            }
-            
-            if (!HappinessModifier.Equals(0)) {
-                _gameManager.Happiness.Value += HappinessModifier;
-            }
-            
-            if (!FatigueModifier.Equals(0)) {
-                _gameManager.Fatigue.Value += FatigueModifier;
-            }
         }
     }
 }

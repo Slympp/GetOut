@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Game;
 using Level.Activities;
 using Settings;
 using UnityEngine;
@@ -19,6 +20,10 @@ namespace Player {
         private Vector3 worldDeltaPosition = Vector3.zero;
         private Vector3 position = Vector3.zero;
         private int _walkAnimationHash;
+
+        private GameObject _cachedHoveredGameObject;
+        private BaseActivity _cachedHoveredActivity;
+        private bool _isHovering;
     
         void Awake() {
             _gameManager = GameManager.Get();
@@ -38,7 +43,7 @@ namespace Player {
             if (_animator == null)
                 Debug.LogError("PlayerController => Animator not found.");
             
-            _agent.updatePosition = false;
+//            _agent.updatePosition = false;
             
             _walkAnimationHash = Animator.StringToHash("walking");
         }
@@ -49,13 +54,24 @@ namespace Player {
                 return;
             
             UpdateTarget();
-
-            UpdatePosition();
         }
 
         private void UpdateTarget() {
             if (Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition), out var hit, Mathf.Infinity, InteractableMask)) {
-
+                
+                // Selection
+                GameObject target = hit.collider.gameObject;
+                if (target.CompareTag("Activity")) {
+                    if (_isHovering) {
+                      if (_cachedHoveredGameObject != target)
+                          SetHovering(target);
+                    } else
+                        SetHovering(target);
+                    
+                } else
+                    SetHovering(null);
+                
+                // Interaction (Movement && Activities)
                 if (Input.GetMouseButtonDown(0) && CurrentState != State.Busy) {
                     StopAllCoroutines();
                     if (hit.collider.CompareTag("Ground"))
@@ -70,23 +86,25 @@ namespace Player {
                         StartCoroutine(MoveTo(activity.GetRigPosition(), DoActivity, activity.transform.position));
                     }
                 }
-            }
+            } else if (_isHovering)
+                SetHovering(null);
         }
-        
-        private void UpdatePosition() {
- 
-            worldDeltaPosition = _agent.nextPosition - transform.position;
 
-            // Pull agent towards character
-            if (worldDeltaPosition.magnitude > _agent.radius)
-                _agent.nextPosition = transform.position + 0.9f * worldDeltaPosition;
-            _agent.nextPosition = transform.position;
-        }
-        
-        private void OnAnimatorMove() {
-            position = _animator.rootPosition;
-            position.y = _agent.nextPosition.y;
-            transform.root.position = position;
+        private void SetHovering(GameObject newObject) {
+            _isHovering = newObject != null;
+
+            if (_cachedHoveredGameObject != null) {
+                _cachedHoveredActivity.ToggleHover(false);
+            }
+
+            if (_isHovering) {
+                _cachedHoveredActivity = newObject.GetComponent<BaseActivity>();
+                if (_cachedHoveredActivity != null)
+                    _cachedHoveredActivity.ToggleHover(true);
+            } else
+                _cachedHoveredActivity = null;
+
+            _cachedHoveredGameObject = newObject;
         }
 
         private IEnumerator MoveTo(Vector3 destination, Action onReach, Vector3 lookAt) {
@@ -99,7 +117,7 @@ namespace Player {
                 
                 yield return new WaitForEndOfFrame();
             }
-
+            
             _animator.SetBool(_walkAnimationHash, false);
             if (onReach != null) {
                 onReach.Invoke();
