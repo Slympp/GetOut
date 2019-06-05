@@ -6,5 +6,6 @@ namespace Settings {
     public class GameSettings : ScriptableObject {
 
         public float TimeScale = 1;
+        public AudioClip MainTheme;
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using Game;
-using Settings;
 using UnityEngine;
-using Button = UnityEngine.UI.Button;
 
 namespace UI {
     public class MainMenuController : MonoBehaviour {
@@ -12,16 +9,16 @@ namespace UI {
         [SerializeField] private GameObject SettingsUI;
         [SerializeField] private GameObject CreditsUI;
 
-        [DllImport("__Internal")]
-        private static extern void openWindow(string url);
+//        [DllImport("__Internal")]
+//        private static extern void openWindow(string url);
      
         public void OpenURL(string url) {
             if (!string.IsNullOrEmpty(url)) {
-                #if !UNITY_EDITOR
-                    openWindow(url);
-                #else
+//                #if !UNITY_EDITOR
+//                    openWindow(url);
+//                #else
                     Application.OpenURL(url);
-                #endif
+//                #endif
             }
         }
         

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Game;
+using Level.Activities;
 using Settings;
 using TMPro;
 using UnityEngine;
@@ -12,31 +13,53 @@ using UnityEngine.UI;
 namespace UI {
     public class GameUIController : MonoBehaviour {
 
+        [Header("Main")]
         [SerializeField] private UISettings Settings;
 
+        [Header("Top UI")]
         [SerializeField] private GameObject TopUI;
-        [SerializeField] private GameObject VictorUI;
-        [SerializeField] private TMP_Text VictorySubtitle;
+        [SerializeField] private Image GameProgress;
+        [SerializeField] private RectTransform GradeRequirement;
+        [SerializeField] private Image GradeValue;
+        [SerializeField] private Image GradeWarning;
+        [SerializeField] private Image HappinessValue;
+        [SerializeField] private Image HappinessWarning;
+        [SerializeField] private Image FatigueValue;
+        [SerializeField] private Image FatigueWarning;
+        [SerializeField] private Color WarningColor;
+        [SerializeField] private Color RequirementColor;
+        
+        [Header("GameOver")]
         [SerializeField] private GameObject GameOverUI; 
         [SerializeField] private TMP_Text GameOverSubtitle;
         
-        [SerializeField] private Image GameProgress;
+        [Header("Victory")]
+        [SerializeField] private GameObject VictorUI;
+        [SerializeField] private TMP_Text VictorySubtitle;
         
-        [SerializeField] private Image GradeValue;
-        [SerializeField] private Image GradeWarning;
-        [SerializeField] private Transform GradeRequirement;
+        [Header("EndGame")]
+        [SerializeField] private GameObject EndGameUI;
         
-        [SerializeField] private Image HappinessValue;
-        [SerializeField] private Image HappinessWarning;
+        [Header("ActivityInfosUI")]
+        [SerializeField] private GameObject ActivityInfoUI;
+        [SerializeField] private TMP_Text ActivityName;
+        [SerializeField] private Image ActivityGradeModifierImage;
+        [SerializeField] private Image ActivityHappinessModifierImage;
+        [SerializeField] private Image ActivityFatigueModifierImage;
+        [SerializeField] private Color DefaultColor;
+        [SerializeField] private Color PositiveColor;
+        [SerializeField] private Color NegativeColor;
 
-        [SerializeField] private Image FatigueValue;
-        [SerializeField] private Image FatigueWarning;
+        [Header("Settings UI")] 
+        [SerializeField] private GameObject SettingsUI;
 
         public void InitFonts(TMP_FontAsset font) {
             if (font == null) {
                 Debug.LogError("GameUIController => Font not found for this level.");
                 return;
             }
+
+            ActivityName.font = font;
 
             TMP_Text[] gameOverTexts = GameOverUI.GetComponentsInChildren<TMP_Text>();
             foreach (var text in gameOverTexts)
@@ -48,15 +71,41 @@ namespace UI {
         }
 
         public void EnableVictory() {
+            ToggleActivityInfo(false, null);
             TopUI.SetActive(false);
-            VictorUI.SetActive(true);
-            VictorySubtitle.text = $"You passed {GameManager.Get().CurrentLevelSettings.Name} final tests";
+
+            if (!GameManager.Get().CurrentLevelSettings.LastLevel) {
+                VictorUI.SetActive(true);
+                VictorySubtitle.text = $"You passed {GameManager.Get().CurrentLevelSettings.Name} final tests";
+            } else {
+                EndGameUI.SetActive(true);
+            }
         }
         
         public void EnableGameOver(string reason) {
+            ToggleActivityInfo(false, null);
             TopUI.SetActive(false);
             GameOverUI.SetActive(true);
             GameOverSubtitle.text = reason;
+        }
+
+        public void ToggleActivityInfo(bool enabled, BaseActivity activity) {
+            if (enabled && activity != null) {
+                ActivityName.text = activity.GetName();
+                SetGaugeModifierImageColor(ActivityGradeModifierImage, activity.GetGradeModifier());
+                SetGaugeModifierImageColor(ActivityHappinessModifierImage, activity.GetHappinessModifier());
+                SetGaugeModifierImageColor(ActivityFatigueModifierImage, activity.GetFatigueModifier());
+            }
+            ActivityInfoUI.SetActive(enabled);
+        }
+        
+        private void SetGaugeModifierImageColor(Image image, float modifier) {
+            image.color = modifier.Equals(0) ? DefaultColor
+                : modifier > 0 ? PositiveColor : NegativeColor;
+        }
+
+        public void ToggleSettings() {
+            SettingsUI.SetActive(!SettingsUI.activeSelf);
         }
 
         public void LoadMainMenu() {
@@ -76,15 +125,22 @@ namespace UI {
         }
 
         public void SetGradeRequirementIndicator(float value) {
-            GradeRequirement.localPosition = new Vector3(Mathf.Clamp(value, 2, 198), 0, 0);
+            float xOffset = value * 196 + 2 - 100;
+            Vector3 position = new Vector3(xOffset, 0, 0);
+            GradeRequirement.localPosition = position;
         }
         
         public void ProgressGauge(float newPercent, Gauge.GaugeType type) {
-            StartCoroutine(ProgressBar(new UpdateData(GetImageByGaugeType(type), newPercent)));
+            StartCoroutine(ProgressBar(new UpdateProgressData(GetImageByGaugeType(type), newPercent)));
         }
 
-        public void ToggleWarningGauge(bool active, Gauge.GaugeType type) {
-            GetImageByGaugeType(type, false).gameObject.SetActive(active);
+        public void ToggleWarningGauge(bool active, Gauge.GaugeType type, bool isGradeRequirement) {
+            Image image = GetImageByGaugeType(type, false);
+
+            if (image != null) {
+                image.color = isGradeRequirement ? RequirementColor : WarningColor;
+                image.gameObject.SetActive(active || isGradeRequirement);
+            }
         }
 
         private Image GetImageByGaugeType(Gauge.GaugeType type, bool value = true) {
@@ -99,7 +155,7 @@ namespace UI {
             return null;
         }
 
-        private IEnumerator ProgressBar(UpdateData d) {
+        private IEnumerator ProgressBar(UpdateProgressData d) {
             if (d.Image == null)
                 yield return null;
             
@@ -114,10 +170,10 @@ namespace UI {
             d.Image.fillAmount = d.TargetPercent;
         }
 
-        private struct UpdateData {
+        private struct UpdateProgressData {
             public readonly Image Image;
             public readonly float TargetPercent;
-            public UpdateData(Image image, float targetPercent) {
+            public UpdateProgressData(Image image, float targetPercent) {
                 Image = image;
                 TargetPercent = targetPercent;
             }

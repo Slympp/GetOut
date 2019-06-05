@@ -16,7 +16,6 @@ namespace Level.Activities {
         [SerializeField] private Transform RigPosition;
         
         [SerializeField] private string Name;
-        [SerializeField] private string Description;
         
         [SerializeField] private float GradeModifier;
         [SerializeField] private float HappinessModifier;
@@ -25,6 +24,10 @@ namespace Level.Activities {
         
         [SerializeField] private Material DefaultMaterial;
         [SerializeField] private Material HighlightedMaterial;
+        private bool _isHighlightable;
+
+        [SerializeField] private AudioClip SoundFX;
+        private AudioSource _audioSource;
 
         private const string TimerPath = "Prefabs/Activities/Timer";
         private GameObject _timerObject;
@@ -45,6 +48,14 @@ namespace Level.Activities {
             
             _meshRenderers = GetComponentsInChildren<MeshRenderer>().ToList();
             _playableDirector = GetComponentInChildren<PlayableDirector>();
+
+            _audioSource = gameObject.AddComponent<AudioSource>();
+            _audioSource.playOnAwake = false;
+            _audioSource.loop = true;
+            _audioSource.spatialize = true;
+            _audioSource.clip = SoundFX;
+
+            _isHighlightable = DefaultMaterial != null && HighlightedMaterial != null;
             
             if (_meshRenderers != null) {
                 ToggleActive(false);
@@ -80,8 +91,10 @@ namespace Level.Activities {
         }
 
         public void ToggleActive(bool active) {
-            foreach (MeshRenderer meshRenderer in _meshRenderers) {
-                meshRenderer.material = active ? HighlightedMaterial : DefaultMaterial;
+            if (_isHighlightable) {
+                foreach (MeshRenderer meshRenderer in _meshRenderers) {
+                    meshRenderer.material = active ? HighlightedMaterial : DefaultMaterial;
+                }
             }
             
             _timer.fillAmount = active ? 1 : 0;
@@ -93,18 +106,27 @@ namespace Level.Activities {
                 else
                     _playableDirector.Stop();
             }
+
+            if (_audioSource) {
+                if (active)
+                    _audioSource.Play();
+                else
+                    _audioSource.Stop();
+            }
         }
         
         public Vector3 GetRigPosition() {
             return RigPosition != null ? RigPosition.position : transform.position;
         }
 
+        protected abstract void OnStart();
+        protected abstract void OnEnd();
+
         public IEnumerator Do(Action<State> setState) {
 
             setState(State.Busy);
             ToggleActive(true);
-            // Play animation on Activity
-
+            OnStart();
             
             float elapsed = 0;
             float elapsedSinceLastTick = 0;
@@ -124,9 +146,14 @@ namespace Level.Activities {
             
             _gameManager.ApplyModifiers(GradeModifier, HappinessModifier, FatigueModifier);
             
-            // Stop animation on Activity
+            OnEnd();
             ToggleActive(false);
             setState(State.Default);
         }
+
+        public string GetName() { return Name; }
+        public float GetGradeModifier() { return GradeModifier; }
+        public float GetHappinessModifier() { return HappinessModifier; }
+        public float GetFatigueModifier() { return FatigueModifier; }
     }
 }

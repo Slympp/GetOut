@@ -13,9 +13,4 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   TimeScale: 0.5
-  DefaultGrades: 50
-  MaxGrades: 100
-  DefaultHappiness: 90
-  MaxHappiness: 100
-  DefaultFatigue: 100
-  MaxFatigue: 100
+  MainTheme: {fileID: 8300000, guid: 2ba580abdf6feef42b74d865f0ef7bc4, type: 3}

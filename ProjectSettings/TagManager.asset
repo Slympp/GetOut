@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Activity
+  - VolumeSlider
   layers:
   - Default
   - TransparentFX

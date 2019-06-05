@@ -1,0 +1,37 @@
+fileFormatVersion: 2
+guid: 35dc7bd53c86db2478e33d50bc9a9aa2
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: eeb34f3ead148d04e8630fc3f79cbc1a, type: 3}
+  dataVersion: 4
+  fileType: 0
+  legacyVoxImport: 0
+  importMode: 1
+  importScale: {x: 0.25, y: 0.25, z: 0.25}
+  importOffset: {x: 0, y: 0, z: 0}
+  combineFaces: 1
+  ignoreCavity: 1
+  shareSameFace: 1
+  outputStructure: 0
+  generateLightmapUVs: 0
+  generateLightmapUVsAngleError: 8
+  generateLightmapUVsAreaError: 15
+  generateLightmapUVsHardAngle: 88
+  generateLightmapUVsPackMargin: 4
+  generateTangents: 0
+  meshFaceVertexOffset: 0
+  loadFromVoxelFile: 1
+  generateMipMaps: 0
+  colliderType: 4
+  materials:
+  - {fileID: -156486658544998735, guid: 35dc7bd53c86db2478e33d50bc9a9aa2, type: 3}
+  - {fileID: 5865586234719623449, guid: 35dc7bd53c86db2478e33d50bc9a9aa2, type: 3}
+  materialNames:
+  - mat0
+  - mat1
+  remappedMaterials: []

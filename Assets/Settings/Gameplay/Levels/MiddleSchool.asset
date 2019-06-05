@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cd37aba627d4e44bd8141f5451366c, type: 3}
+  m_Name: MiddleSchool
+  m_EditorClassIdentifier: 
+  Name: MiddleSchool
+  Font: {fileID: 11400000, guid: d74387fc9058161459f1078db6d91114, type: 2}
+  GradesRequirement: 60
+  Duration: 150
+  GradesReduction: -0.4
+  HappinessReduction: -0.4
+  FatigueReduction: -0.6
+  LevelPrefab: {fileID: 7644656111507302128, guid: 389b47377cde10546bfb56e12f3e8e53,
+    type: 3}
+  BackgroundMusic: {fileID: 8300000, guid: e84b66ac809342748857f6a243b4f387, type: 3}
+  LastLevel: 1

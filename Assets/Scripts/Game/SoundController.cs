@@ -1,39 +1,58 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game {
     
-//    [RequireComponent(typeof(AudioSource))]
     public class SoundController : MonoBehaviour {
 
-        [SerializeField] private Slider VolumeSlider;
-        
-        private AudioSource _source;
+        private AudioSource[] _sources;
+//        private AudioSource _soundsSource;
+        private Slider _volumeSlider;
 
-        private static SoundController _instance;
+        private float _volumeValue = 0.5f;
 
-        void Awake() {
-            _source = GetComponent<AudioSource>();
+        public void SetAudioSources() {
+            _sources = GetComponents<AudioSource>();
+        }
+
+        public void InitSoundController(Slider slider) {
+            // MUSIC
+            _sources[0].playOnAwake = true;
+            _sources[0].loop = true;
             
-            if (_instance != null)
-                Destroy(gameObject);
-
-            _instance = this;
+            // SOUNDS
+            _sources[1].playOnAwake = false;
+            _sources[1].loop = false;
+            
+            _volumeSlider = slider;
+            _volumeSlider.onValueChanged.RemoveAllListeners();
+            _volumeSlider.value = _volumeValue;
+            _volumeSlider.onValueChanged.AddListener(UpdateVolume);
+            UpdateVolume(_volumeValue);
         }
         
-        public static SoundController Get() {
-            return _instance;
+        public void UpdateVolume(float value) {
+            _volumeValue = value;
+            if (!(_volumeValue >= 0) || !(_volumeValue <= 1)) return;
+            
+            foreach (var s in _sources) {
+                s.volume = _volumeValue;
+            }
         }
 
-        public void UpdateVolume() {
-            float volume = VolumeSlider.value;
-            if (volume >= 0 && volume <= 1)
-                _source.volume = volume;
+        public void PlayMusic(AudioClip clip) {
+            _sources[0].clip = clip;
+            _sources[0].Play();
         }
 
-        public void PlayClip(AudioClip clip) {
-            _source.clip = clip;
-            _source.Play();
+        public void PlaySound(AudioClip clip) {
+            if (_sources[1] == null)
+                SetAudioSources();
+            
+            _sources[1].clip = clip;
+            _sources[1].Play();
         }
     }
 }

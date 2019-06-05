@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Level.Activities;
 using Player;
 using Settings;
 using UI;
@@ -14,6 +15,7 @@ namespace Game {
         public static CharacterTemplate CharacterTemplate { get; private set; }
         
         public LevelSettings CurrentLevelSettings { get; private set; }
+        public SoundController SoundController { get; private set; }
         
         [Header("Levels")]
         [SerializeField] private List<LevelSettings> LevelSettings;
@@ -35,102 +37,56 @@ namespace Game {
         private PlayerController _playerController;
         
         private const string PlayerPrefabPath = "Prefabs/Characters/Player";
-        
-        private static bool MainMenu = true;
         private static GameManager _instance;
     
         void Awake() {
-        
-            if (_instance != null)
+            if (_instance != null) {
                 Destroy(gameObject);
+                return;
+            }
 
             _instance = this;
+            DontDestroyOnLoad(_instance.gameObject);
 
-            if (MainMenu)
+            SceneManager.sceneLoaded += OnLevelLoaded;
+        }
+
+        void OnLevelLoaded(Scene scene, LoadSceneMode mode) {
+
+            SoundController = _instance.gameObject.GetComponent<SoundController>();
+            SoundController.SetAudioSources();
+            
+            if (scene.name != "Game") {
+                SoundController.PlayMusic(GameSettings.MainTheme);
+                if (_instantiatedLevel != null)
+                    Destroy(_instantiatedLevel);
                 return;
-
+            }
+            
             _uiController = GameObject.Find("GameUI").GetComponent<GameUIController>();
             if (_uiController == null)
                 Debug.LogError("GameManager => GameUIController not found");
-        }
-
-        void Start() {
-
-            if (MainMenu)
-                return;
             
-
             CurrentLevelSettings = GetLevelSettings();
             if (CurrentLevelSettings == null) {
                 Debug.LogError($"GameManager => Settings not found for Level: {CurrentLevel}");  
                 return;
             }
             
-            SoundController.Get().PlayClip(CurrentLevelSettings.BackgroundMusic);
+            SoundController.PlayMusic(CurrentLevelSettings.BackgroundMusic);
             _uiController.InitFonts(CurrentLevelSettings.Font);
-            InitGauges(CurrentLevelSettings);
-            InitLevel(CurrentLevelSettings);
+            
+            InitGauges();
+            InitLevel();
             InitPlayer();
 
-            StartCoroutine(ProgressGame(CurrentLevelSettings.Duration));
+            StartCoroutine(nameof(ProgressGame));
         }
 
         public void SetTemplate(CharacterTemplate template) {
             CharacterTemplate = template;
         }
-
-        private void InitGauges(LevelSettings settings) {
-            Grades = new Gauge(GradesSettings, UpdateGauge, GameOver, ToggleWarning);
-            _uiController.SetGradeRequirementIndicator(settings.GradesRequirement / GradesSettings.MaxValue);
         
-            Happiness = new Gauge(HappinessSettings, UpdateGauge, GameOver, ToggleWarning);
-            Fatigue = new Gauge(FatigueSettings, UpdateGauge, GameOver, ToggleWarning);
-        }
-
-        private void InitLevel(LevelSettings settings) {
-            if (_instantiatedLevel != null)
-                Destroy(_instantiatedLevel);
-
-            if (settings.LevelPrefab != null) {
-                _instantiatedLevel = Instantiate(settings.LevelPrefab, transform);
-            } else {
-                Debug.LogError($"GameManager => Prefab not found for Level: {settings.Name}");  
-            }
-        }
-
-        private void InitPlayer() {
-            GameObject player = Instantiate(Resources.Load<GameObject>(PlayerPrefabPath));
-            if (player != null)
-                _playerController = player.GetComponentInChildren<PlayerController>();
-        }
-    
-        private IEnumerator ProgressGame(float duration) {
-            float elapsed = 0;
-            float elapsedSinceLastTick = 0;
-
-            _uiController.UpdateGameProgressBar(0);
-            
-            while (elapsed < duration && _playerController.CurrentState != State.GameOver) {
-                elapsed += Time.deltaTime;
-                elapsedSinceLastTick += Time.deltaTime;
-                if (elapsedSinceLastTick >= GameSettings.TimeScale) {
-                    elapsedSinceLastTick = 0;
-                    ApplyModifiers(CurrentLevelSettings.GradesReduction, 
-                        CurrentLevelSettings.HappinessReduction, 
-                        CurrentLevelSettings.FatigueReduction);
-                }
-            
-                _uiController.UpdateGameProgressBar(Mathf.Lerp(0, 1, elapsed / duration));
-                yield return new WaitForEndOfFrame();
-            }
-
-            if (_playerController.CurrentState != State.GameOver) {
-                _uiController.UpdateGameProgressBar(1);
-                bool victory = Grades.Value >= CurrentLevelSettings.GradesRequirement;
-                GameOver(victory, "Your grades were too low, you failed your final exams");
-            }
-        }
-
         public void ApplyModifiers(float grades, float happiness, float fatigue) {
             if (!grades.Equals(0))
                 Grades.Value += grades * CharacterTemplate.GradeMultiplier;
@@ -140,6 +96,63 @@ namespace Game {
 
             if (!fatigue.Equals(0))
                 Fatigue.Value += fatigue * CharacterTemplate.FatigueMultiplier;
+        }
+
+        public void ToggleActivityInfos(bool enabled, BaseActivity activity = null) {
+            _uiController.ToggleActivityInfo(enabled, activity);
+        }
+
+        private void InitGauges() {
+            Grades = new Gauge(GradesSettings, UpdateGauge, GameOver, ToggleWarning, CurrentLevelSettings.GradesRequirement);
+            _uiController.SetGradeRequirementIndicator(CurrentLevelSettings.GradesRequirement / GradesSettings.MaxValue);
+        
+            Happiness = new Gauge(HappinessSettings, UpdateGauge, GameOver, ToggleWarning);
+            Fatigue = new Gauge(FatigueSettings, UpdateGauge, GameOver, ToggleWarning);
+        }
+
+        private void InitLevel() {
+            if (_instantiatedLevel != null)
+                Destroy(_instantiatedLevel);
+
+            if (CurrentLevelSettings.LevelPrefab != null) {
+                _instantiatedLevel = Instantiate(CurrentLevelSettings.LevelPrefab, transform);
+                _instantiatedLevel.transform.localPosition = CurrentLevelSettings.LevelPrefab.transform.position;
+            } else {
+                Debug.LogError($"GameManager => Prefab not found for Level: {CurrentLevelSettings.Name}");  
+            }
+        }
+
+        private void InitPlayer() {
+            GameObject player = Instantiate(Resources.Load<GameObject>(PlayerPrefabPath));
+            if (player != null)
+                _playerController = player.GetComponentInChildren<PlayerController>();
+        }
+    
+        private IEnumerator ProgressGame() {
+            float elapsed = 0;
+            float elapsedSinceLastTick = 0;
+
+            _uiController.UpdateGameProgressBar(0);
+            
+            while (elapsed < CurrentLevelSettings.Duration && _playerController.CurrentState != State.GameOver) {
+                elapsed += Time.deltaTime;
+                elapsedSinceLastTick += Time.deltaTime;
+                if (elapsedSinceLastTick >= GameSettings.TimeScale) {
+                    elapsedSinceLastTick = 0;
+                    ApplyModifiers(CurrentLevelSettings.GradesReduction, 
+                        CurrentLevelSettings.HappinessReduction, 
+                        CurrentLevelSettings.FatigueReduction);
+                }
+            
+                _uiController.UpdateGameProgressBar(Mathf.Lerp(0, 1, elapsed / CurrentLevelSettings.Duration));
+                yield return new WaitForEndOfFrame();
+            }
+
+            if (_playerController.CurrentState != State.GameOver) {
+                _uiController.UpdateGameProgressBar(1);
+                bool victory = Grades.Value >= CurrentLevelSettings.GradesRequirement;
+                GameOver(victory, "Your grades were too low, you failed your final exams");
+            }
         }
 
         private void GameOver(bool victory, string reason) {
@@ -158,8 +171,8 @@ namespace Game {
             _uiController.ProgressGauge(value / max, type);
         }
 
-        private void ToggleWarning(bool active, Gauge.GaugeType type) {
-            _uiController.ToggleWarningGauge(active, type);
+        private void ToggleWarning(bool active, Gauge.GaugeType type, bool isGradeRequirement) {
+            _uiController.ToggleWarningGauge(active, type, isGradeRequirement);
         }
     
         private LevelSettings GetLevelSettings() {
@@ -176,13 +189,11 @@ namespace Game {
         }
 
         public static void LoadNextLevel() {
-            MainMenu = false;
             CurrentLevel++;
             SceneManager.LoadScene("Game");
         }
         
         public static void LoadMainMenu() {
-            MainMenu = true;
             CurrentLevel = -1;
             SceneManager.LoadScene("MainMenu");
         }

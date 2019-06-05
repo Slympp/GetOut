@@ -20,6 +20,7 @@ namespace Player {
         private Vector3 worldDeltaPosition = Vector3.zero;
         private Vector3 position = Vector3.zero;
         private int _walkAnimationHash;
+        private int _actionAnimationHash;
 
         private GameObject _cachedHoveredGameObject;
         private BaseActivity _cachedHoveredActivity;
@@ -43,9 +44,8 @@ namespace Player {
             if (_animator == null)
                 Debug.LogError("PlayerController => Animator not found.");
             
-//            _agent.updatePosition = false;
-            
             _walkAnimationHash = Animator.StringToHash("walking");
+            _actionAnimationHash = Animator.StringToHash("doing");
         }
 
         void Update() {
@@ -93,14 +93,17 @@ namespace Player {
         private void SetHovering(GameObject newObject) {
             _isHovering = newObject != null;
 
-            if (_cachedHoveredGameObject != null) {
+            if (_cachedHoveredGameObject != null && _cachedHoveredActivity != null) {
                 _cachedHoveredActivity.ToggleHover(false);
+                _gameManager.ToggleActivityInfos(false);
             }
 
             if (_isHovering) {
                 _cachedHoveredActivity = newObject.GetComponent<BaseActivity>();
-                if (_cachedHoveredActivity != null)
+                if (_cachedHoveredActivity != null) {
                     _cachedHoveredActivity.ToggleHover(true);
+                    _gameManager.ToggleActivityInfos(true, _cachedHoveredActivity);
+                }
             } else
                 _cachedHoveredActivity = null;
 
@@ -120,6 +123,7 @@ namespace Player {
             
             _animator.SetBool(_walkAnimationHash, false);
             if (onReach != null) {
+                _animator.SetBool(_actionAnimationHash, true);
                 onReach.Invoke();
                 
                 if (lookAt != Vector3.zero)
@@ -128,8 +132,14 @@ namespace Player {
         }
 
         public void SetState(State state) {
-            if (CurrentState != State.GameOver)
+            
+            if (CurrentState != State.GameOver) {
+                
+                if (state != State.Busy)
+                    _animator.SetBool(_actionAnimationHash, false);
+                
                 CurrentState = state;
+            }
         }
     }
 

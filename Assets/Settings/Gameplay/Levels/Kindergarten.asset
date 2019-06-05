@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Kindergarten
   Font: {fileID: 11400000, guid: 841041755185f634799c03174a18468e, type: 2}
-  GradesRequirement: 60
-  Duration: 60
-  GradesReduction: -0.1
-  HappinessReduction: -0.1
-  FatigueReduction: -0.5
-  LevelPrefab: {fileID: 461331859508282851, guid: 90875cad718aeca4ea6636fe250e0c27,
+  GradesRequirement: 40
+  Duration: 150
+  GradesReduction: -0.2
+  HappinessReduction: -0.2
+  FatigueReduction: -0.4
+  LevelPrefab: {fileID: 2312829381529251095, guid: 5858b2305b7e3264290bfd6d371bd6c7,
     type: 3}
-  BackgroundMusic: {fileID: 8300000, guid: b2a90c5c16527ab479fe30f3b05288fa, type: 3}
-  LastLevel: 1
+  BackgroundMusic: {fileID: 8300000, guid: e84b66ac809342748857f6a243b4f387, type: 3}
+  LastLevel: 0

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Game;
 using Settings;
 using TMPro;
@@ -10,12 +11,12 @@ using UnityEngine.UI;
 
 public class TemplateSelector : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     
-    [SerializeField] private MainMenuController MainMenuController;
     [SerializeField] private CharacterTemplate Template;
 
     [SerializeField] private TMP_Text TemplateName;
     [SerializeField] private TMP_Text TemplateDescription;
-    
+
+    private const string DefaultText = "Select a Character";
     private Button _button;
 
     void Awake() {
@@ -32,19 +33,18 @@ public class TemplateSelector : MonoBehaviour, IPointerEnterHandler, IPointerExi
         }
         
         _button.onClick.AddListener(() => StartGame(Template));
+        TemplateName.text = DefaultText;
     }
     
     public void OnPointerEnter(PointerEventData eventData) {
         TemplateName.text = Template.Name;
-        TemplateName.gameObject.SetActive(true);
         
         TemplateDescription.text = Template.Description;
         TemplateDescription.gameObject.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        TemplateName.gameObject.SetActive(false);
-        TemplateName.text = "";
+        TemplateName.text = DefaultText;
         
         TemplateDescription.gameObject.SetActive(false);
         TemplateDescription.text = "";

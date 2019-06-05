@@ -1,5 +1,6 @@
 using System;
 using Settings;
+using UnityEngine;
 
 namespace Game {
     public class Gauge {
@@ -21,11 +22,22 @@ namespace Game {
                         _value = _maxValue;
 
                     // Toggle Warning
-                    if (_value <= _warningValue && !_wasWarning) {
-                        _wasWarning = true;
-                        OnWarningCallback();
-                    } else if (_value > _warningValue && _wasWarning) {
+                    if (_value <= _warningValue) {
+                        if (!_wasWarning) {
+                            _wasWarning = true;
+                            _wasRequirement = false;
+                            OnWarningCallback();
+                        }
+                    } else if (!_requirement.Equals(0) && _value <= _requirement) {
+                        if (!_wasRequirement) {
+                            _wasWarning = false;
+                            _wasRequirement = true;
+                            OnWarningCallback();
+                        }
+                    } else if ((_wasWarning  && _value > _warningValue) || 
+                               (!_requirement.Equals(0) && _wasRequirement && _value > _requirement)) {
                         _wasWarning = false;
+                        _wasRequirement = false;
                         OnWarningCallback();
                     }
                     
@@ -40,20 +52,22 @@ namespace Game {
             }
         }
 
+        private float _value;
         private readonly Action<float, float, GaugeType> _onUpdate;
         private readonly GaugeType _type;
-        private          float     _value;
         private readonly float     _maxValue;
+        private readonly float _requirement;
 
-        private Action<bool, GaugeType> _onWarningUpdate;
+        private readonly Action<bool, GaugeType, bool> _onWarningUpdate;
         private readonly float _warningValue;
         private bool _wasWarning;
+        private bool _wasRequirement;
             
         private readonly Action<bool, string> _onReachZero;
         private readonly string _gameOverReason;
 
         public Gauge(GaugeSettings settings, Action<float, float, GaugeType> onUpdate, 
-            Action<bool, string> onReachZero, Action<bool, GaugeType> onWarningUpdate) {
+            Action<bool, string> onReachZero, Action<bool, GaugeType, bool> onWarningUpdate, float requirement = 0) {
             
             _onUpdate = onUpdate;
             _onReachZero = onReachZero;
@@ -61,11 +75,13 @@ namespace Game {
             
             _maxValue = settings.MaxValue;
             _warningValue = settings.WarningValue;
+            _requirement = requirement;
             _type = settings.Type;
             _value = settings.DefaultValue;
             _gameOverReason = settings.GameOverReason;
             
             _wasWarning = false;
+            _wasRequirement = false;
             
             // Trigger callback at init
             OnUpdateCallback();
@@ -76,7 +92,7 @@ namespace Game {
         }
 
         private void OnWarningCallback() {
-            _onWarningUpdate?.Invoke(_wasWarning, _type);
+            _onWarningUpdate?.Invoke(_wasWarning, _type, _wasRequirement);
         }
     }
 }
