@@ -15,6 +15,8 @@ namespace UI {
 
         [Header("Main")]
         [SerializeField] private UISettings Settings;
+        [SerializeField] private TMP_Text LevelName;
+        [SerializeField] private float FadeOutTime = 1.5f;
 
         [Header("Top UI")]
         [SerializeField] private GameObject TopUI;
@@ -53,6 +55,7 @@ namespace UI {
         [Header("Settings UI")] 
         [SerializeField] private GameObject SettingsUI;
 
+        
         public void InitFonts(TMP_FontAsset font) {
             if (font == null) {
                 Debug.LogError("GameUIController => Font not found for this level.");
@@ -60,6 +63,7 @@ namespace UI {
             }
 
             ActivityName.font = font;
+            LevelName.font = font;
 
             TMP_Text[] gameOverTexts = GameOverUI.GetComponentsInChildren<TMP_Text>();
             foreach (var text in gameOverTexts)
@@ -106,6 +110,19 @@ namespace UI {
 
         public void ToggleSettings() {
             SettingsUI.SetActive(!SettingsUI.activeSelf);
+        }
+
+        public IEnumerator FadeLevelName(string _name) {
+            LevelName.text = _name;
+            Color originalColor = LevelName.color;
+            
+            for (float t = 0.01f; t < FadeOutTime; t += Time.deltaTime) {
+                LevelName.color = Color.Lerp(originalColor, Color.clear, Mathf.Min(1, t/FadeOutTime));
+                yield return new WaitForEndOfFrame();
+            }
+            LevelName.color = Color.clear;
+            yield return new WaitForSeconds(1.5f);
+            LevelName.gameObject.SetActive(false);
         }
 
         public void LoadMainMenu() {

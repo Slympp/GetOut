@@ -555,7 +555,7 @@ MonoBehaviour:
   Duration: 4
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &1648190703654089210
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -956,7 +956,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &7406659758099351239
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1759,7 +1759,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &1295278010807300196
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2837,7 +2837,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &5274904584713280336
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3060,7 +3060,7 @@ MonoBehaviour:
   Duration: 4
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &4780566228592307638
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3597,7 +3597,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &2129425958273011244
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4320,7 +4320,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: a0a388b59f439ff4282ef910d152e5b4, type: 3}
 --- !u!65 &2969122540392040970
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4777,7 +4777,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: a0a388b59f439ff4282ef910d152e5b4, type: 3}
 --- !u!65 &3092757763589086306
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5036,7 +5036,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &5235834700770477155
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6191,7 +6191,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &461435027257357521
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9155,7 +9155,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: a0a388b59f439ff4282ef910d152e5b4, type: 3}
 --- !u!65 &3659248667720675428
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15360,7 +15360,7 @@ MonoBehaviour:
   Duration: 4
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &5531268301878922956
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17251,7 +17251,7 @@ MonoBehaviour:
   Duration: 4
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &2858965994672577358
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18856,7 +18856,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &8535981113438397984
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19079,7 +19079,7 @@ MonoBehaviour:
   Duration: 4
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &4703975794610178165
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24076,7 +24076,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &3795375534887937550
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25345,7 +25345,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &6270784540117619853
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30213,7 +30213,7 @@ MonoBehaviour:
   Duration: 4
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &5758595757418411243
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31087,7 +31087,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: a0a388b59f439ff4282ef910d152e5b4, type: 3}
 --- !u!65 &8107964763562544464
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36159,7 +36159,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &1426470966334537215
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37864,7 +37864,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &6274913621712905978
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40262,7 +40262,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &1374227156950246732
 BoxCollider:
   m_ObjectHideFlags: 0

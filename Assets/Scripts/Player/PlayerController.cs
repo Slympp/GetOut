@@ -9,12 +9,13 @@ using UnityEngine.AI;
 namespace Player {
     public class PlayerController : MonoBehaviour {
 
-        [SerializeField] LayerMask InteractableMask;
+        [SerializeField] private LayerMask InteractableMask;
         public State CurrentState { get; private set; }
 
         private GameManager _gameManager;
         private Camera       _camera;
         private NavMeshAgent _agent;
+        private AudioSource _audio;
 
         private Animator _animator;
         private Vector3 worldDeltaPosition = Vector3.zero;
@@ -32,6 +33,8 @@ namespace Player {
                 Debug.LogError("PlayerController => GameManager not found.");
             
             _agent = GetComponent<NavMeshAgent>();
+            _audio = GetComponent<AudioSource>();
+            
             _camera = Camera.main;
             if (_camera == null)
                 Debug.LogError("PlayerController => Camera not found.");
@@ -113,6 +116,8 @@ namespace Player {
         private IEnumerator MoveTo(Vector3 destination, Action onReach, Vector3 lookAt) {
             _agent.SetDestination(destination);
             _animator.SetBool(_walkAnimationHash, true);
+            
+            _audio.Play();
                 
             while (_agent.pathPending || 
                    _agent.remainingDistance >= _agent.stoppingDistance || 
@@ -121,6 +126,8 @@ namespace Player {
                 yield return new WaitForEndOfFrame();
             }
             
+            _audio.Stop();
+
             _animator.SetBool(_walkAnimationHash, false);
             if (onReach != null) {
                 _animator.SetBool(_actionAnimationHash, true);

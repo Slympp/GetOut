@@ -1087,7 +1087,7 @@ MonoBehaviour:
   Duration: 4
   DefaultMaterial: {fileID: -6677776632893961798}
   HighlightedMaterial: {fileID: 2100000, guid: a3c0c72664824f24c939909549dc333a, type: 2}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 8052d8c268d0eb942ae618e150fc61dd, type: 3}
 --- !u!65 &5849235229926932976
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3177,7 +3177,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: -6677776632893961798}
   HighlightedMaterial: {fileID: 2100000, guid: a3c0c72664824f24c939909549dc333a, type: 2}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &2352771304981355844
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3316,7 +3316,7 @@ MonoBehaviour:
   Duration: 4
   DefaultMaterial: {fileID: -6677776632893961798}
   HighlightedMaterial: {fileID: 2100000, guid: a3c0c72664824f24c939909549dc333a, type: 2}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 8052d8c268d0eb942ae618e150fc61dd, type: 3}
 --- !u!65 &744660470140111690
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4030,7 +4030,7 @@ GameObject:
   - component: {fileID: 3542448943795731087}
   - component: {fileID: 6601832972602220036}
   m_Layer: 9
-  m_Name: Wheel
+  m_Name: Merry-go-round
   m_TagString: Activity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4133,14 +4133,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RigPosition: {fileID: 6802099570115901817}
-  Name: Wheel
+  Name: Merry-go-round
   GradeModifier: -1
   HappinessModifier: 3
   FatigueModifier: -2
   Duration: 4
   DefaultMaterial: {fileID: -6677776632893961798}
   HighlightedMaterial: {fileID: 2100000, guid: a3c0c72664824f24c939909549dc333a, type: 2}
-  SoundFX: {fileID: 8300000, guid: 80da23b2b66b9994087c72f0e582724f, type: 3}
+  SoundFX: {fileID: 8300000, guid: e75ad6ed847a373478ffdf8c668b4bdf, type: 3}
   rotationSpeed: 180
 --- !u!135 &6601832972602220036
 SphereCollider:
@@ -5709,7 +5709,7 @@ MonoBehaviour:
   Duration: 8
   DefaultMaterial: {fileID: -6677776632893961798}
   HighlightedMaterial: {fileID: 2100000, guid: a3c0c72664824f24c939909549dc333a, type: 2}
-  SoundFX: {fileID: 0}
+  SoundFX: {fileID: 8300000, guid: 7066fdce68b656e48a69a694b49aa33b, type: 3}
 --- !u!65 &585842985
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   TimeScale: 0.5
-  MainTheme: {fileID: 8300000, guid: 2ba580abdf6feef42b74d865f0ef7bc4, type: 3}
+  MainTheme: {fileID: 8300000, guid: 79018ffc12f94b742901d2306ad2d1d2, type: 3}

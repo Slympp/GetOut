@@ -384,7 +384,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -120, y: -50}
-  m_SizeDelta: {x: 1100, y: 200}
+  m_SizeDelta: {x: 1526.4, y: 200}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &343298918
 MonoBehaviour:
@@ -406,7 +406,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: GAMETITLE
+  m_text: GET OUT!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a8646de190027be41b9a618c2c33843f, type: 2}
   m_sharedMaterial: {fileID: -2476124556821268051, guid: a8646de190027be41b9a618c2c33843f,
@@ -435,8 +435,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 183
-  m_fontSizeBase: 183
+  m_fontSize: 240
+  m_fontSizeBase: 240
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -476,10 +476,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 343298918}
-    characterCount: 9
+    characterCount: 8
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -2710,7 +2710,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 100, y: 600}
+  m_AnchoredPosition: {x: 100, y: 550}
   m_SizeDelta: {x: 900, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1286347288
@@ -4670,9 +4670,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelSettings:
-  - {fileID: 11400000, guid: 33c14083d96229c40812a99327b34f99, type: 2}
+  - {fileID: 11400000, guid: 94e33c8b2d5098a44a6f33ed9b62e128, type: 2}
   - {fileID: 11400000, guid: 0ef112de5a6e3554d8ad726b6b8fe571, type: 2}
   - {fileID: 11400000, guid: 94e33c8b2d5098a44a6f33ed9b62e128, type: 2}
+  - {fileID: 11400000, guid: 58988d96ea794e94ba19a8cea11340f0, type: 2}
   GameSettings: {fileID: 11400000, guid: 5a84d92f077aa884c9be1d4f4811d0dd, type: 2}
   GradesSettings: {fileID: 11400000, guid: 1eb23eab9f384d340906954b8c7545c9, type: 2}
   HappinessSettings: {fileID: 11400000, guid: dd55c792eca849b43a6bd42f8b9709c9, type: 2}

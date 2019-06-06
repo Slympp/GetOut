@@ -81,6 +81,7 @@ namespace Game {
             InitPlayer();
 
             StartCoroutine(nameof(ProgressGame));
+            StartCoroutine(_uiController.FadeLevelName(CurrentLevelSettings.Name));
         }
 
         public void SetTemplate(CharacterTemplate template) {
