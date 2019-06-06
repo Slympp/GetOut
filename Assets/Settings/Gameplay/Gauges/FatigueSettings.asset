@@ -16,4 +16,4 @@ MonoBehaviour:
   DefaultValue: 100
   WarningValue: 50
   MaxValue: 100
-  GameOverReason: You got really tired
+  GameOverReason: You were too tired

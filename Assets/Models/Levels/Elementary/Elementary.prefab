@@ -816,10 +816,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RigPosition: {fileID: 8616406731265501798}
   Name: Study
-  GradeModifier: 0
-  HappinessModifier: 0
-  FatigueModifier: 0
-  Duration: 3
+  GradeModifier: 2.5
+  HappinessModifier: -0.5
+  FatigueModifier: -1
+  Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
   SoundFX: {fileID: 0}
@@ -831,7 +831,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459317575545585153}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.45, y: 3, z: 6.1}
@@ -1224,10 +1224,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RigPosition: {fileID: 182387023270115423}
   Name: Study
-  GradeModifier: 0
-  HappinessModifier: 0
-  FatigueModifier: 0
-  Duration: 3
+  GradeModifier: 2.5
+  HappinessModifier: -0.5
+  FatigueModifier: -1
+  Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
   SoundFX: {fileID: 0}
@@ -1239,7 +1239,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722090503570496832}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.45, y: 3, z: 6.1}
@@ -2832,36 +2832,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &1521994197866006266
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4248257494076059918}
-  m_Layer: 9
-  m_Name: RigPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4248257494076059918
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1521994197866006266}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: -3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5417161796971052865}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1533082116209205423
 GameObject:
   m_ObjectHideFlags: 0
@@ -5055,36 +5025,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &2681994460577434773
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 110463830804990292}
-  m_Layer: 9
-  m_Name: RigPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &110463830804990292
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2681994460577434773}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: -3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4225108629735726050}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2739914935728991576
 GameObject:
   m_ObjectHideFlags: 0
@@ -5596,10 +5536,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RigPosition: {fileID: 5596748138160654312}
   Name: Study
-  GradeModifier: 0
-  HappinessModifier: 0
-  FatigueModifier: 0
-  Duration: 3
+  GradeModifier: 2.5
+  HappinessModifier: -0.5
+  FatigueModifier: -1
+  Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
   SoundFX: {fileID: 0}
@@ -5611,7 +5551,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2859813999605485930}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.45, y: 3, z: 6.1}
@@ -6391,10 +6331,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RigPosition: {fileID: 1967421006339621624}
   Name: Playroom
-  GradeModifier: 0
-  HappinessModifier: 0
-  FatigueModifier: 0
-  Duration: 3
+  GradeModifier: -1
+  HappinessModifier: 2
+  FatigueModifier: -1
+  Duration: 4
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
   SoundFX: {fileID: 0}
@@ -7352,10 +7292,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RigPosition: {fileID: 4108950415439346925}
   Name: Study
-  GradeModifier: 0
-  HappinessModifier: 0
-  FatigueModifier: 0
-  Duration: 3
+  GradeModifier: 2.5
+  HappinessModifier: -0.5
+  FatigueModifier: -1
+  Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
   SoundFX: {fileID: 0}
@@ -7367,7 +7307,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3625015002360611304}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.45, y: 3, z: 6.1}
@@ -8377,36 +8317,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &4007859996479440429
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2553719694777627474}
-  m_Layer: 9
-  m_Name: RigPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2553719694777627474
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4007859996479440429}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: -3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2346512730950414757}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4025120450245186101
 GameObject:
   m_ObjectHideFlags: 0
@@ -8950,36 +8860,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &4217814538982228350
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2170918564790976350}
-  m_Layer: 9
-  m_Name: RigPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2170918564790976350
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4217814538982228350}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: -3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 828555900132700983}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4272925421375524815
 GameObject:
   m_ObjectHideFlags: 0
@@ -9415,10 +9295,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RigPosition: {fileID: 2160650426855728722}
   Name: Study
-  GradeModifier: 0
-  HappinessModifier: 0
-  FatigueModifier: 0
-  Duration: 3
+  GradeModifier: 2.5
+  HappinessModifier: -0.5
+  FatigueModifier: -1
+  Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
   SoundFX: {fileID: 0}
@@ -9430,7 +9310,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4601023794242823140}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.45, y: 3, z: 6.1}
@@ -10521,36 +10401,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &4958931037679086994
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 343426766802703107}
-  m_Layer: 9
-  m_Name: RigPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &343426766802703107
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4958931037679086994}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3740463697545054995}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4982187703502294759
 GameObject:
   m_ObjectHideFlags: 0
@@ -12137,10 +11987,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RigPosition: {fileID: 4690811495224646650}
   Name: Playroom
-  GradeModifier: 0
-  HappinessModifier: 0
-  FatigueModifier: 0
-  Duration: 3
+  GradeModifier: -0.5
+  HappinessModifier: 2
+  FatigueModifier: -1
+  Duration: 4
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
   SoundFX: {fileID: 0}
@@ -12205,10 +12055,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RigPosition: {fileID: 3415169350902896633}
   Name: Study
-  GradeModifier: 0
-  HappinessModifier: 0
-  FatigueModifier: 0
-  Duration: 3
+  GradeModifier: 2.5
+  HappinessModifier: -0.5
+  FatigueModifier: -1
+  Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
   SoundFX: {fileID: 0}
@@ -12220,7 +12070,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5702968114467785216}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.45, y: 3, z: 6.1}
@@ -13958,36 +13808,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &6417256129491179499
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3306951630024798585}
-  m_Layer: 9
-  m_Name: RigPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3306951630024798585
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6417256129491179499}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: -3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 685565848309748722}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6422948876223019398
 GameObject:
   m_ObjectHideFlags: 0
@@ -15358,10 +15178,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RigPosition: {fileID: 5051908285643905404}
   Name: Study
-  GradeModifier: 0
-  HappinessModifier: 0
-  FatigueModifier: 0
-  Duration: 3
+  GradeModifier: 2.5
+  HappinessModifier: -0.5
+  FatigueModifier: -1
+  Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
   SoundFX: {fileID: 0}
@@ -15373,7 +15193,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6932910551203484887}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.45, y: 3, z: 6.1}
@@ -19135,10 +18955,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RigPosition: {fileID: 2580357735684992563}
   Name: Study
-  GradeModifier: 0
-  HappinessModifier: 0
-  FatigueModifier: 0
-  Duration: 3
+  GradeModifier: 2.5
+  HappinessModifier: -0.5
+  FatigueModifier: -1
+  Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
   SoundFX: {fileID: 0}
@@ -19150,7 +18970,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8583396525585300114}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.45, y: 3, z: 6.1}
@@ -20766,16 +20586,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 452958022089102753, guid: 945519f0053e1f7419c856af2047ef22,
-        type: 3}
-      propertyPath: RigPosition
-      value: 
-      objectReference: {fileID: 4248257494076059918}
-    - target: {fileID: 452958022089102753, guid: 945519f0053e1f7419c856af2047ef22,
-        type: 3}
-      propertyPath: Name
-      value: Sleep
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 945519f0053e1f7419c856af2047ef22, type: 3}
 --- !u!4 &5417161796971052865 stripped
@@ -20850,16 +20660,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 452958022089102753, guid: 945519f0053e1f7419c856af2047ef22,
-        type: 3}
-      propertyPath: RigPosition
-      value: 
-      objectReference: {fileID: 3306951630024798585}
-    - target: {fileID: 452958022089102753, guid: 945519f0053e1f7419c856af2047ef22,
-        type: 3}
-      propertyPath: Name
-      value: Sleep
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 945519f0053e1f7419c856af2047ef22, type: 3}
@@ -20936,16 +20736,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 452958022089102753, guid: 945519f0053e1f7419c856af2047ef22,
-        type: 3}
-      propertyPath: RigPosition
-      value: 
-      objectReference: {fileID: 2170918564790976350}
-    - target: {fileID: 452958022089102753, guid: 945519f0053e1f7419c856af2047ef22,
-        type: 3}
-      propertyPath: Name
-      value: Sleep
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 945519f0053e1f7419c856af2047ef22, type: 3}
 --- !u!4 &828555900132700983 stripped
@@ -21020,16 +20810,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 452958022089102753, guid: 945519f0053e1f7419c856af2047ef22,
-        type: 3}
-      propertyPath: RigPosition
-      value: 
-      objectReference: {fileID: 2553719694777627474}
-    - target: {fileID: 452958022089102753, guid: 945519f0053e1f7419c856af2047ef22,
-        type: 3}
-      propertyPath: Name
-      value: Sleep
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 945519f0053e1f7419c856af2047ef22, type: 3}
@@ -21106,6 +20886,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7544848551219293008, guid: c1265853011adde4ab39b9c31780db83,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1265853011adde4ab39b9c31780db83, type: 3}
 --- !u!4 &5284521732733760068 stripped
@@ -21181,16 +20966,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 452958022089102753, guid: 945519f0053e1f7419c856af2047ef22,
-        type: 3}
-      propertyPath: RigPosition
-      value: 
-      objectReference: {fileID: 343426766802703107}
-    - target: {fileID: 452958022089102753, guid: 945519f0053e1f7419c856af2047ef22,
-        type: 3}
-      propertyPath: Name
-      value: Sleep
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 945519f0053e1f7419c856af2047ef22, type: 3}
 --- !u!4 &3740463697545054995 stripped
@@ -21265,16 +21040,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 452958022089102753, guid: 945519f0053e1f7419c856af2047ef22,
-        type: 3}
-      propertyPath: RigPosition
-      value: 
-      objectReference: {fileID: 110463830804990292}
-    - target: {fileID: 452958022089102753, guid: 945519f0053e1f7419c856af2047ef22,
-        type: 3}
-      propertyPath: Name
-      value: Sleep
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 945519f0053e1f7419c856af2047ef22, type: 3}

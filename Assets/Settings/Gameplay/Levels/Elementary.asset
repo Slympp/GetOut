@@ -22,4 +22,4 @@ MonoBehaviour:
   LevelPrefab: {fileID: 7644656111507302128, guid: 389b47377cde10546bfb56e12f3e8e53,
     type: 3}
   BackgroundMusic: {fileID: 8300000, guid: e84b66ac809342748857f6a243b4f387, type: 3}
-  LastLevel: 1
+  LastLevel: 0

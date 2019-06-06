@@ -16,4 +16,4 @@ MonoBehaviour:
   DefaultValue: 60
   WarningValue: 25
   MaxValue: 100
-  GameOverReason: You dropped from school
+  GameOverReason: Your grades were too low

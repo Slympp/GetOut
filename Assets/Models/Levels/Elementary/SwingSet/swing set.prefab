@@ -310,10 +310,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RigPosition: {fileID: 3943465041003482485}
   Name: Swing Set
-  GradeModifier: 0
-  HappinessModifier: 0
-  FatigueModifier: 0
-  Duration: 3
+  GradeModifier: -1
+  HappinessModifier: 3
+  FatigueModifier: -1.5
+  Duration: 8
   DefaultMaterial: {fileID: 0}
   HighlightedMaterial: {fileID: 0}
   SoundFX: {fileID: 0}

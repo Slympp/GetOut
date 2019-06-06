@@ -16,10 +16,10 @@ MonoBehaviour:
   Font: {fileID: 11400000, guid: d74387fc9058161459f1078db6d91114, type: 2}
   GradesRequirement: 60
   Duration: 150
-  GradesReduction: -0.4
-  HappinessReduction: -0.4
+  GradesReduction: -0.35
+  HappinessReduction: -0.35
   FatigueReduction: -0.6
-  LevelPrefab: {fileID: 7644656111507302128, guid: 389b47377cde10546bfb56e12f3e8e53,
+  LevelPrefab: {fileID: 2207873018775218548, guid: a4122d452b51b6941b31a0e28961f725,
     type: 3}
   BackgroundMusic: {fileID: 8300000, guid: e84b66ac809342748857f6a243b4f387, type: 3}
   LastLevel: 1
