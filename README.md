@@ -3,12 +3,10 @@ A prototype made for https://itch.io/jam/weekly-game-jam-99
 
 In "Get Out!"  you will have to put yourself in the shoes of a student.
 
-The idea behind this game is about showing how school can be a tough experience. Your goal is to complete your studies while managing to keep your grades, emotional state and health in a good place, until you can get your way out !
+The idea behind this game is to show how school can be a tough experience. Your goal is to complete your studies while managing to keep your grades, emotional state and health in a good place, until you can get your way out !
 
 GameDesign:
 https://drive.google.com/drive/u/0/folders/1gTz71W3alVg0dru7S6RZlD51HkG46UY0  
-
-*Due to bad time management, the balance is terrible*  
 
 Credits :
 - Arts: [Romario Peynado](https://www.artstation.com/romario11) (mario#9397)
